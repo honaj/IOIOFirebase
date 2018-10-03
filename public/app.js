@@ -7,6 +7,7 @@ let objectRow = document.getElementById("objectRow");
 let dateRow = document.getElementById("dateRow");
 let returnedRow = document.getElementById("returnedRow");
 let cells = [];
+let user;
 
 document.addEventListener('DOMContentLoaded', function() {
     // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
@@ -37,13 +38,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     let realtimeRef = firebase.database().ref('/users');
     realtimeRef.once('value', function(snapshot) {
-        console.log(snapshot.val());
+        populateTable(snapshot);
     });
     realtimeRef.on('value', function(snapshot) {
-        //console.log(snapshot.val());
-        
+        populateTable(snapshot);
     });
+    //login();
   });
+
+  function login() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then(result => {
+            user = result.user;
+            document.write(user.displayName);
+        })
+  }
 
   sendButton.onclick = function() {
     if(borrowerName.value && objectToBorrow.value) {
@@ -61,11 +71,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 
-function populateTable () {
+function populateTable(snapshot) {
+    let returnArray = [];
+        snapshot.forEach(function(childSnapshot) {
+            let item = childSnapshot.val();
+            returnArray.push(item);
+        });
     for(cell of cells) {
         cell.remove();
     }
-    for(item of list) {
+    for(item of returnArray) {
         //console.log(item);
         cells.push(nameRow.insertCell().appendChild(document.createTextNode(item.name)));
         cells.push(objectRow.insertCell().appendChild(document.createTextNode(item.object)));
