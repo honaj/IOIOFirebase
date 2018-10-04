@@ -105,9 +105,14 @@ function populateTable(snapshot) {
         cells.push(objectRow.insertCell().appendChild(document.createTextNode(item.object)));
         cells.push(amountRow.insertCell().appendChild(document.createTextNode(item.amount)));
         cells.push(dateRow.insertCell().appendChild(document.createTextNode(item.date)));
-        cells.push(returnedRow.insertCell().appendChild(document.createTextNode(item.returned)));
+        //cells.push(returnedRow.insertCell().appendChild(document.createTextNode(item.returned)));
         //let buttonCell = returnedRow.insertCell();
-        //let returnButton = cells.push(buttonCell.appendChild(document.createElement("button")));
+        let buttonCell = returnedRow.insertCell();
+        let returnButton = document.createElement("button");
+        buttonCell.appendChild(returnButton);
+        
+
+        //let returnButton = cells.push(buttonCell.appendChild());
         //returnButton.style.value = "test";
     }
 } 
