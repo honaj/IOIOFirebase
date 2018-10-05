@@ -2,11 +2,11 @@ let amount = document.getElementById("amount");
 let objectToBorrow = document.getElementById("objectToBorrow");
 let sendButton = document.getElementById("sendButton");
 let borrowListTable = document.getElementById("borrowListTable");
-let nameRow = document.getElementById("nameRow");
+/* let nameRow = document.getElementById("nameRow");
 let amountRow = document.getElementById("amountRow");
 let objectRow = document.getElementById("objectRow");
 let dateRow = document.getElementById("dateRow");
-let returnedRow = document.getElementById("returnedRow");
+let returnedRow = document.getElementById("returnedRow"); */
 let user;
 let cells = [];
 let keys = [];
@@ -101,6 +101,7 @@ function populateTable(snapshot) {
     }
     for(item of loanArray) {
         //console.log(item);
+       // let newRow = borrowListTable.insertRow(borrowListTable.rows.length);
         cells.push(nameRow.insertCell().appendChild(document.createTextNode(item.name)));
         cells.push(objectRow.insertCell().appendChild(document.createTextNode(item.object)));
         cells.push(amountRow.insertCell().appendChild(document.createTextNode(item.amount)));
@@ -110,9 +111,10 @@ function populateTable(snapshot) {
         let buttonCell = returnedRow.insertCell();
         let returnButton = document.createElement("button");
         buttonCell.appendChild(returnButton);
-        
-
-        //let returnButton = cells.push(buttonCell.appendChild());
-        //returnButton.style.value = "test";
+        returnButtons.push(returnButton);
+        returnButton.textContent = "Not returned";
+        returnButton.addEventListener("click", function() {
+            console.log("pressed")
+        });
     }
-} 
+}
