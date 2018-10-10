@@ -2,15 +2,17 @@ let amount = document.getElementById("amount");
 let objectToBorrow = document.getElementById("objectToBorrow");
 let sendButton = document.getElementById("sendButton");
 let borrowListTable = document.getElementById("borrowListTable");
-/* let nameRow = document.getElementById("nameRow");
+let nameRow = document.getElementById("nameRow");
 let amountRow = document.getElementById("amountRow");
 let objectRow = document.getElementById("objectRow");
 let dateRow = document.getElementById("dateRow");
-let returnedRow = document.getElementById("returnedRow"); */
+let returnedRow = document.getElementById("returnedRow");
 let user;
+let realtimeRef;
 let cells = [];
 let keys = [];
 let returnButtons = [];
+let snapShots = [];
 
 document.addEventListener('DOMContentLoaded', function() {
     // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
@@ -43,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     //Get database
-    let realtimeRef = firebase.database().ref();
+    realtimeRef = firebase.database().ref();
     //On startup
     realtimeRef.once('value', function(snapshot) {
         populateTable(snapshot);
@@ -88,33 +90,51 @@ sendButton.addEventListener('click', function() {
 
 //Draw database to table
 function populateTable(snapshot) {
-    let loanArray = [];
-    snapshot.forEach(function(childSnapshot) {
-        keys.push(childSnapshot.key);
-        loanArray.push(childSnapshot.val());
-    });
-    for(key of keys) {
-        console.log(key);
-    }
     for(cell of cells) {
         cell.remove();
     }
-    for(item of loanArray) {
-        //console.log(item);
-       // let newRow = borrowListTable.insertRow(borrowListTable.rows.length);
-        cells.push(nameRow.insertCell().appendChild(document.createTextNode(item.name)));
-        cells.push(objectRow.insertCell().appendChild(document.createTextNode(item.object)));
-        cells.push(amountRow.insertCell().appendChild(document.createTextNode(item.amount)));
-        cells.push(dateRow.insertCell().appendChild(document.createTextNode(item.date)));
+    for(button of returnButtons) {
+        button.remove();
+    }
+    let loanArray = [];
+    snapshot.forEach(function(childSnapshot) {
+        //console.log(childSnapshot);
+        keys.push(childSnapshot.key);
+        loanArray.push(childSnapshot.val());
+        cells.push(nameRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().name)));
+        cells.push(objectRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().object)));
+        cells.push(amountRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().amount)));
+        cells.push(dateRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().date)));
         //cells.push(returnedRow.insertCell().appendChild(document.createTextNode(item.returned)));
         //let buttonCell = returnedRow.insertCell();
         let buttonCell = returnedRow.insertCell();
         let returnButton = document.createElement("button");
         buttonCell.appendChild(returnButton);
         returnButtons.push(returnButton);
-        returnButton.textContent = "Not returned";
+        if(childSnapshot.val().returned === "") {
+            returnButton.textContent = "Not returned";
+        }
+        else {
+            returnButton.textContent = childSnapshot.val().returned;
+        }
+        //returnButton.textContent = childSnapshot.key;
         returnButton.addEventListener("click", function() {
-            console.log("pressed")
+            let key = childSnapshot.key;
+            //var recentPostsRef = firebase.database().ref('ioiolendingsystem').equalTo(key);
+            /* let item = firebase.database().ref('ioiolendingsystem/').child(key);
+            console.log(item.val().name) */
+            firebase.database().ref('ioiolendingsystem/' + key)
+            .once('value')
+            .then(function(snapshot) {
+            var value = snapshot.val();
+            console.log(snapshot.val());
+            //console.log('location:', value.account_capabilities);
+            //resp.json(value.account_capabilities);
+            })
+            //console.log(key)
+            /* realtimeRef.once('value', function(snapshot) {
+                populateTable(snapshot);
+            }); */
         });
-    }
+    });
 }
