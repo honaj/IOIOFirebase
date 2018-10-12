@@ -115,26 +115,17 @@ function populateTable(snapshot) {
             returnButton.textContent = "Not returned";
         }
         else {
-            returnButton.textContent = childSnapshot.val().returned;
+            returnButton.textContent = childSnapshot.val().returned; 
         }
-        //returnButton.textContent = childSnapshot.key;
         returnButton.addEventListener("click", function() {
-            let key = childSnapshot.key;
-            //var recentPostsRef = firebase.database().ref('ioiolendingsystem').equalTo(key);
-            /* let item = firebase.database().ref('ioiolendingsystem/').child(key);
-            console.log(item.val().name) */
-            firebase.database().ref('ioiolendingsystem/' + key)
-            .once('value')
-            .then(function(snapshot) {
-            var value = snapshot.val();
-            console.log(snapshot.val());
-            //console.log('location:', value.account_capabilities);
-            //resp.json(value.account_capabilities);
+            let snapshot = childSnapshot;
+            firebase.database().ref(snapshot.key).set({
+                name: snapshot.val().name,
+                object: snapshot.val().object,
+                amount: snapshot.val().amount,
+                date: snapshot.val().date,
+                returned: getDate()
             })
-            //console.log(key)
-            /* realtimeRef.once('value', function(snapshot) {
-                populateTable(snapshot);
-            }); */
         });
     });
 }
