@@ -16,9 +16,11 @@
     <!-- <script defer src="/__/firebase/init.js"></script> -->
   </head>
   <body>
-    <input type ="text" id="objectToBorrow" placeholder="thing you want to borrow">
-    <input type ="text" id="amount" placeholder="amount">
+    <input type="text" id="borrowerName" placeholder="Name">
+    <input type ="text" id="objectToBorrow" placeholder="Object">
+    <input type ="text" id="amount" placeholder="Amount">
     <button id="sendButton">Borrow</button>
+    <button id="loginButton">Admin login</button>
     <table id ="borrowListTable" width="100%">
       <tr id="nameRow">
         <th>Name</th>
@@ -31,6 +33,9 @@
       </tr>
       <tr id="dateRow">
         <th>Date</th>
+      </tr>
+      <tr id="responsibleRow">
+        <th>Responsibe</th>
       </tr>
       <tr id="returnedRow">
         <th>Returned</th>
