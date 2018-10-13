@@ -10,7 +10,7 @@ let dateRow = document.getElementById("dateRow");
 let responsibleRow = document.getElementById("responsibleRow");
 let returnedRow = document.getElementById("returnedRow");
 let loginButton = document.getElementById("loginButton");
-let user;
+let currentUser;
 let cells = [];
 let returnButtons = [];
 
@@ -50,26 +50,50 @@ document.addEventListener('DOMContentLoaded', function() {
         populateTable(snapshot);
     });
     //Hide input elements if not logged it
-    if(!user) {
+   /*  if(!user) {
         name.style.display = "none";
         objectToBorrow.style.display = "none";
         amount.style.display = "none";
         sendButton.style.display = "none";
-    }
+    } */
     //Setup login
-    loginButton.addEventListener("pointerdown", function(){
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-        .then(result => {
-            user = result.user;
+     loginButton.addEventListener("pointerdown", function(){
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(function() {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            // In memory persistence will be applied to the signed in Google user
+            // even though the persistence was set to 'none' and a page redirect
+            // occurred.
+            /* user = result.user;
+            console.log(user.displayName); */
+            return firebase.auth().signInWithRedirect(provider);
+            })
+            .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+        });
+    }); 
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
             name.style.display = "block";
             objectToBorrow.style.display = "block";
             amount.style.display = "block";
             sendButton.style.display = "block";
-        })
-    });
+            loginButton.style.display = "none";
+            // User is signed in.
+            currentUser = user;
+            console.log(currentUser.displayName)
+        }
+        else {
+            name.style.display = "none";
+            objectToBorrow.style.display = "none";
+            amount.style.display = "none";
+            sendButton.style.display = "none";
+            console.log("no user!")
+        }
+      });
   });
-
 
 //Get today's date
 function getDate() {
@@ -79,20 +103,20 @@ function getDate() {
 
 //Push new loan data to database
 sendButton.addEventListener("pointerdown", function() {
-    if(user && name.value && isNaN(name.value) && objectToBorrow.value && isNaN(objectToBorrow.value) && amount.value && !isNaN(amount.value)) {
-       let newLoan =  firebase.database().ref().push({
+    if(currentUser && name.value && isNaN(name.value) && objectToBorrow.value && isNaN(objectToBorrow.value) && amount.value && !isNaN(amount.value)) {
+       let newLoan = firebase.database().ref().push({
             name: name.value,
             object: objectToBorrow.value,
             amount: amount.value,
             date: getDate(),
-            responsible: user.displayName,
+            responsible: currentUser.displayName,
             returned: "",
-            });
+        });
         name.value = "";
         objectToBorrow.value = "";
         amount.value = "";
     }
-    //Add nice error message here
+    //Needs contextual error message based on which input is bad
     else console.log("bad input!");
 });
 

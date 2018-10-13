@@ -14,8 +14,12 @@
     <script defer src="/__/firebase/5.5.2/firebase-storage.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <!-- <script defer src="/__/firebase/init.js"></script> -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
   </head>
   <body>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
     <input type="text" id="borrowerName" placeholder="Name">
     <input type ="text" id="objectToBorrow" placeholder="Object">
     <input type ="text" id="amount" placeholder="Amount">
