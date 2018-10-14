@@ -15,6 +15,10 @@ let cells = [];
 let returnButtons = [];
 
 document.addEventListener('DOMContentLoaded', function() {
+    
+    document.body.addEventListener('touchstart', function() {
+        
+    }, false);
     // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
     // // The Firebase SDK is initialized and available here!
     //
@@ -49,51 +53,49 @@ document.addEventListener('DOMContentLoaded', function() {
     firebase.database().ref().on('value', function(snapshot) {
         populateTable(snapshot);
     });
-    //Hide input elements if not logged it
-   /*  if(!user) {
-        name.style.display = "none";
-        objectToBorrow.style.display = "none";
-        amount.style.display = "none";
-        sendButton.style.display = "none";
-    } */
-    //Setup login
+    loginButton.style.cursor = "pointer"
      loginButton.addEventListener("pointerdown", function(){
+        document.body.style.color = "red"
+        
+        document.getElementById('load').innerHTML = "test";
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(function() {
             var provider = new firebase.auth.GoogleAuthProvider();
-            // In memory persistence will be applied to the signed in Google user
-            // even though the persistence was set to 'none' and a page redirect
-            // occurred.
-            /* user = result.user;
-            console.log(user.displayName); */
             return firebase.auth().signInWithRedirect(provider);
             })
             .catch(function(error) {
-            // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
         });
     }); 
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
+            //On succesful login
+            currentUser = user;
+           // document.body.style.backgroundImage = "url(" + currentUser.displayPicture + ")";
             name.style.display = "block";
             objectToBorrow.style.display = "block";
             amount.style.display = "block";
             sendButton.style.display = "block";
             loginButton.style.display = "none";
-            // User is signed in.
-            currentUser = user;
             console.log(currentUser.displayName)
         }
+        //Hide input elements if not logged it
         else {
             name.style.display = "none";
             objectToBorrow.style.display = "none";
             amount.style.display = "none";
             sendButton.style.display = "none";
             console.log("no user!")
+
         }
-      });
-  });
+    });
+    
+window.onload = function() {
+    if(/iP(hone|ad)/.test(window.navigator.userAgent)) {
+        
+    }
+    };
 
 //Get today's date
 function getDate() {
@@ -142,20 +144,24 @@ function populateTable(snapshot) {
         if(childSnapshot.val().returned === "") {
             returnButton.textContent = "Not returned";
             //Setup button to return object
-            returnButton.addEventListener("pointerdown", function() {
-                let snapshot = childSnapshot;
-                firebase.database().ref(snapshot.key).set({
-                    name: snapshot.val().name,
-                    object: snapshot.val().object,
-                    amount: snapshot.val().amount,
-                    date: snapshot.val().date,
-                    responsible: snapshot.val().responsible,
-                    returned: getDate()
+            if(currentUser)
+            {
+                returnButton.addEventListener("pointerdown", function() {
+                    let snapshot = childSnapshot;
+                    firebase.database().ref(snapshot.key).set({
+                        name: snapshot.val().name,
+                        object: snapshot.val().object,
+                        amount: snapshot.val().amount,
+                        date: snapshot.val().date,
+                        responsible: snapshot.val().responsible,
+                        returned: getDate()
+                    });
                 });
-            });
+            }
         }
         else {
             returnButton.textContent = childSnapshot.val().returned; 
         }
     });
 }
+  });

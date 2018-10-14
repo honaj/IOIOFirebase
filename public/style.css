@@ -1,0 +1,8 @@
+body {
+    cursor: pointer;
+}
+
+#loginButton {
+    cursor: pointer;
+    /* display: none; */
+}
