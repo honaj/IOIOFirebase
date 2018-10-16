@@ -1,8 +1,9 @@
 body {
-    cursor: pointer;
+    touch-action: none;
 }
 
 #loginButton {
     cursor: pointer;
     /* display: none; */
+    /* pointer-events:  */
 }

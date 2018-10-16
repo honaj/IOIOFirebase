@@ -1,48 +1,24 @@
-[debug] [2018-10-14T22:23:58.442Z] ----------------------------------------------------------------------
-[debug] [2018-10-14T22:23:58.445Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\honaj\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
-[debug] [2018-10-14T22:23:58.445Z] CLI Version:   4.2.1
-[debug] [2018-10-14T22:23:58.445Z] Platform:      win32
-[debug] [2018-10-14T22:23:58.445Z] Node Version:  v8.11.4
-[debug] [2018-10-14T22:23:58.446Z] Time:          Mon Oct 15 2018 00:23:58 GMT+0200 (W. Europe Daylight Time)
-[debug] [2018-10-14T22:23:58.446Z] ----------------------------------------------------------------------
+[debug] [2018-10-16T18:59:48.603Z] ----------------------------------------------------------------------
+[debug] [2018-10-16T18:59:48.606Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\honaj\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-10-16T18:59:48.606Z] CLI Version:   4.2.1
+[debug] [2018-10-16T18:59:48.607Z] Platform:      win32
+[debug] [2018-10-16T18:59:48.607Z] Node Version:  v8.11.4
+[debug] [2018-10-16T18:59:48.607Z] Time:          Tue Oct 16 2018 20:59:48 GMT+0200 (W. Europe Daylight Time)
+[debug] [2018-10-16T18:59:48.607Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2018-10-14T22:23:58.460Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2018-10-14T22:23:58.461Z] > authorizing via signed-in user
-[debug] [2018-10-14T22:23:58.463Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/ioiolendingsystem  
+[debug] [2018-10-16T18:59:48.617Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-10-16T18:59:48.618Z] > authorizing via signed-in user
+[debug] [2018-10-16T18:59:48.620Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/ioiolendingsystem  
  
-[debug] [2018-10-14T22:23:59.274Z] <<< HTTP RESPONSE 200
-[debug] [2018-10-14T22:23:59.275Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ioiolendingsystem  
+[debug] [2018-10-16T18:59:49.372Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-16T18:59:49.373Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ioiolendingsystem  
  
-[debug] [2018-10-14T22:24:00.289Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-16T18:59:50.361Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Serving from 'C:\Users\honaj\OneDrive\Interaction Design\ioio\IOIOFirebase'...
 [info] 
-[debug] [2018-10-14T22:24:00.292Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/89677931964/clients/_:getWebAppConfig  
+[debug] [2018-10-16T18:59:50.364Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/89677931964/clients/_:getWebAppConfig  
  
-[debug] [2018-10-14T22:24:00.851Z] <<< HTTP RESPONSE 200
-[info] i  hosting[ioiolendingsystem]: Serving hosting files from: public
-[info] +  hosting[ioiolendingsystem]: Local server: http://localhost:5000
-[debug] [2018-10-14T22:36:15.595Z] ----------------------------------------------------------------------
-[debug] [2018-10-14T22:36:15.600Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\honaj\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
-[debug] [2018-10-14T22:36:15.600Z] CLI Version:   4.2.1
-[debug] [2018-10-14T22:36:15.600Z] Platform:      win32
-[debug] [2018-10-14T22:36:15.601Z] Node Version:  v8.11.4
-[debug] [2018-10-14T22:36:15.601Z] Time:          Mon Oct 15 2018 00:36:15 GMT+0200 (W. Europe Daylight Time)
-[debug] [2018-10-14T22:36:15.601Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2018-10-14T22:36:15.634Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2018-10-14T22:36:15.636Z] > authorizing via signed-in user
-[debug] [2018-10-14T22:36:15.640Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/ioiolendingsystem  
- 
-[debug] [2018-10-14T22:36:16.585Z] <<< HTTP RESPONSE 200
-[debug] [2018-10-14T22:36:16.588Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ioiolendingsystem  
- 
-[debug] [2018-10-14T22:36:17.544Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from 'C:\Users\honaj\OneDrive\Interaction Design\ioio\IOIOFirebase'...
-[info] 
-[debug] [2018-10-14T22:36:17.549Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/89677931964/clients/_:getWebAppConfig  
- 
-[debug] [2018-10-14T22:36:18.295Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-16T18:59:50.732Z] <<< HTTP RESPONSE 200
 [info] i  hosting[ioiolendingsystem]: Serving hosting files from: public
 [info] +  hosting[ioiolendingsystem]: Local server: http://localhost:5000

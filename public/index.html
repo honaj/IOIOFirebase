@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IOIO lending system</title>
-
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/5.5.2/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -18,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
-  <body>
+  <body touch-action="none">
     <input type="text" id="borrowerName" placeholder="Name">
     <input type ="text" id="objectToBorrow" placeholder="Object">
     <input type ="text" id="amount" placeholder="Amount">
@@ -44,7 +43,9 @@
         <th>Returned</th>
       </tr>
     </table>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <p id="errorStatus"></p>
+    <p id="loginStatus"></p>
     <script src= "app.js"></script>
+    <script src= "pep.js"></script>
   </body>
 </html>
