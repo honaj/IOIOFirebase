@@ -13,7 +13,6 @@ let loginButton = document.getElementById("loginButton");
 let loginStatus = document.getElementById("loginStatus");
 let errorStatus = document.getElementById("errorStatus");
 let currentUser;
-let validUsers;
 let cells = [];
 let returnButtons = [];
 
@@ -53,7 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
     firebase.database().ref("Loans").on('value', function(snapshot) {
         populateTable(snapshot);
     });
-     loginButton.addEventListener("pointerdown", function(e){
+    //Setup login button
+    loginButton.addEventListener("pointerdown", function(e){
         e.preventDefault();
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(function() {
@@ -81,16 +81,25 @@ document.addEventListener('DOMContentLoaded', function() {
                         return false;
                     }
                 });
+                //Hide input elements and sign out if not logged in as a registered admin
+                if(!currentUser) {
+                    name.style.display = "none";
+                    objectToBorrow.style.display = "none";
+                    amount.style.display = "none";
+                    sendButton.style.display = "none";
+                    firebase.auth().signOut().then(function() {
+                        loginStatus.innerHTML = "You're not an admin!";
+                        }, function(error) {
+                            // An error happened.
+                        });
+                }
             });
         }
-        //Hide input elements if not logged in or login not a registered admin
-        else if(!user || !currentUser) {
+        else {
             name.style.display = "none";
             objectToBorrow.style.display = "none";
             amount.style.display = "none";
             sendButton.style.display = "none";
-            if (!user) loginStatus.innerHTML = "Not logged in";
-            else loginStatus.innerHTML = "You're not an admin!";
         }
     });
 
@@ -104,7 +113,7 @@ function getDate() {
 sendButton.addEventListener("pointerdown", function(e) {
     e.preventDefault();
     if(currentUser && name.value && isNaN(name.value) && objectToBorrow.value && isNaN(objectToBorrow.value) && amount.value && !isNaN(amount.value)) {
-       let newLoan = firebase.database().ref("Loans").push({
+        firebase.database().ref("Loans").push({
             name: name.value,
             object: objectToBorrow.value,
             amount: amount.value,
@@ -133,22 +142,21 @@ function populateTable(snapshot) {
     }
     //Draw new table
     snapshot.forEach(function(childSnapshot) {
-        if(childSnapshot.val().responsible != null)
-        {
-            cells.push(nameRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().name)));
-            cells.push(objectRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().object)));
-            cells.push(amountRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().amount)));
-            cells.push(dateRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().date)));
-            cells.push(responsibleRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().responsible)));
-            let returnButton = document.createElement("button");
-            returnButtons.push(returnedRow.insertCell().appendChild(returnButton));
-            //Check if object is returned
-            if(childSnapshot.val().returned === "") {
-                returnButton.textContent = "Not returned";
-                //Setup button to return object
-                if(currentUser)
-                {
-                    returnButton.addEventListener("pointerdown", function() {
+        cells.push(nameRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().name)));
+        cells.push(objectRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().object)));
+        cells.push(amountRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().amount)));
+        cells.push(dateRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().date)));
+        cells.push(responsibleRow.insertCell().appendChild(document.createTextNode(childSnapshot.val().responsible)));
+        let returnButton = document.createElement("button");
+        returnButtons.push(returnedRow.insertCell().appendChild(returnButton));
+        //Check if object is returned
+        if(childSnapshot.val().returned === "") {
+            returnButton.textContent = "Not returned";
+            //Setup button to return object
+                returnButton.addEventListener("pointerdown", function(e) {
+                    e.preventDefault();
+                    if(currentUser)
+                    {
                         let snapshot = childSnapshot;
                         firebase.database().ref("Loans/" + snapshot.key).set({
                             name: snapshot.val().name,
@@ -158,13 +166,12 @@ function populateTable(snapshot) {
                             responsible: snapshot.val().responsible,
                             returned: getDate()
                         });
-                    });
-                }
-            }
-            else {
-                returnButton.textContent = childSnapshot.val().returned; 
-            }
-        }  
+                    }
+                });
+        }
+        else {
+            returnButton.textContent = childSnapshot.val().returned; 
+        }
     });
     }
 });
