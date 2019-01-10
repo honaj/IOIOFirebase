@@ -151,7 +151,7 @@ function populateTable(snapshot) {
         returnButtons.push(returnedRow.insertCell().appendChild(returnButton));
         //Check if object is returned
         if(childSnapshot.val().returned === "") {
-            returnButton.textContent = "Not returned";
+            returnButton.textContent = "Click to return";
             //Setup button to return object
                 returnButton.addEventListener("pointerdown", function(e) {
                     e.preventDefault();

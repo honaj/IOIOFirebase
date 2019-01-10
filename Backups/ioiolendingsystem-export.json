@@ -1,0 +1,44 @@
+{
+  "AdminAccounts" : {
+    "Alison" : "alison.thomas.sound@gmail.com",
+    "Ellen" : "ellen.martensson@gmail.com",
+    "Johan" : "honajnahoj@gmail.com",
+    "Josefine" : "juicehansson@gmail.com",
+    "Karl" : "karlsoderby@gmail.com",
+    "Taner Olcay" : "ttaner.olcay@gmail.com"
+  },
+  "Loans" : {
+    "-LQ3k_N6KarAmtRH-IHF" : {
+      "amount" : "1",
+      "date" : "2018-10-30",
+      "name" : "Adam Ingvarsson",
+      "object" : "3D printare",
+      "responsible" : "Karl Söderby",
+      "returned" : "2018-12-3"
+    },
+    "-LSF7SIb7JDmd7Cc2HDP" : {
+      "amount" : "20",
+      "date" : "2018-11-26",
+      "name" : "Josefine",
+      "object" : "UNO",
+      "responsible" : "Josefine Hansson",
+      "returned" : "2018-11-26"
+    },
+    "-LSUKzIPa3OGPmRzJcTU" : {
+      "amount" : "1",
+      "date" : "2018-11-29",
+      "name" : "Jip Asveld",
+      "object" : "Micro usb cable",
+      "responsible" : "Johan Hellgren",
+      "returned" : ""
+    },
+    "-LSnyTjm9xQ-ACp-ngNi" : {
+      "amount" : "3",
+      "date" : "2018-12-3",
+      "name" : "Karl Söderby",
+      "object" : "Jumper wires",
+      "responsible" : "Karl Söderby",
+      "returned" : "2018-12-3"
+    }
+  }
+}
