@@ -1,0 +1,31 @@
+[debug] [2019-04-06T15:24:42.024Z] ----------------------------------------------------------------------
+[debug] [2019-04-06T15:24:42.025Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-04-06T15:24:42.026Z] CLI Version:   6.5.0
+[debug] [2019-04-06T15:24:42.026Z] Platform:      darwin
+[debug] [2019-04-06T15:24:42.026Z] Node Version:  v10.15.3
+[debug] [2019-04-06T15:24:42.027Z] Time:          Sat Apr 06 2019 17:24:42 GMT+0200 (Central European Summer Time)
+[debug] [2019-04-06T15:24:42.027Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-04-06T15:24:42.038Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-04-06T15:24:42.038Z] > authorizing via signed-in user
+[debug] [2019-04-06T15:24:42.039Z] [iam] checking project ioiolendingsystem for permissions ["firebase.projects.get"]
+[debug] [2019-04-06T15:24:42.040Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-04-06T15:24:42.040Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-04-06T15:24:42.190Z] <<< HTTP RESPONSE 200
+[debug] [2019-04-06T15:24:42.199Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/ioiolendingsystem:testIamPermissions  
+
+[debug] [2019-04-06T15:24:43.201Z] <<< HTTP RESPONSE 200
+[debug] [2019-04-06T15:24:43.203Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ioiolendingsystem  
+ 
+[debug] [2019-04-06T15:24:44.122Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/johan/Documents/Interaction Design/ioio/IOIOFirebase'...
+[info] 
+[debug] [2019-04-06T15:24:44.124Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/89677931964/clients/_:getWebAppConfig  
+ 
+[debug] [2019-04-06T15:24:44.585Z] <<< HTTP RESPONSE 200
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port...
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port...
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5010
